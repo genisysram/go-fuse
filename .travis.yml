@@ -2,6 +2,9 @@ sudo: required
 # Ubuntu 18.04 "Bionic", https://docs.travis-ci.com/user/reference/bionic/
 # Kernel 5.0.0-1026-gcp
 dist: bionic
+arch:
+     - amd64
+     - ppc64le
 
 language: go
 go_import_path: github.com/hanwen/go-fuse
@@ -16,14 +19,16 @@ go:
   - master
 
 env:
-  - GOMAXPROCS=1
+ # - GOMAXPROCS=1
   # vvv = native `nproc`
   - GOMAXPROCS=
+  
 
 matrix:
  fast_finish: true
  allow_failures:
    - go: master
+   - go: 1.10
 
 before_install:
   - sudo apt-get install -qq pkg-config fuse
